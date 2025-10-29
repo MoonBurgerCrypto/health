@@ -2,75 +2,98 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Roboto, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  background-color: #0b0e13;
-  color: #f0f4f8;
+  background: #0f172a;
+  color: #e2e8f0;
   line-height: 1.6;
 }
 
-header {
+/* HERO SECTION */
+.hero {
   text-align: center;
-  padding: 80px 20px 50px;
-  background: linear-gradient(145deg, #0b0e13, #1a2433);
-  border-bottom: 2px solid #1c2a3a;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  padding: 80px 20px;
+  color: #f8fafc;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-header h1 {
-  font-size: 2.8rem;
+.hero h1 {
+  font-size: 2.6rem;
   margin-bottom: 10px;
-  color: #4da8da;
+  color: #38bdf8;
 }
 
-header p {
+.hero p {
   font-size: 1.1rem;
-  color: #b0c4de;
+  color: #cbd5e1;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* TIP CARDS */
 .tips {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  padding: 50px 60px;
+  gap: 25px;
 }
 
-.tip {
-  background-color: #131922;
-  border-radius: 16px;
+.tip-card {
+  background: #1e293b;
+  border-radius: 15px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.tip:hover {
+.tip-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
 }
 
-.tip img {
+.tip-card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
 
-.tip h2 {
-  font-size: 1.4rem;
-  color: #64c4ed;
-  margin: 20px;
+.tip-card h2 {
+  font-size: 1.2rem;
+  color: #38bdf8;
+  margin: 15px;
 }
 
-.tip p {
-  color: #d0d6dc;
-  margin: 0 20px 25px;
+.tip-card p {
   font-size: 1rem;
+  color: #cbd5e1;
+  margin: 0 15px 20px 15px;
 }
 
+/* FOOTER */
 footer {
   text-align: center;
-  padding: 30px 10px;
-  border-top: 1px solid #1c2a3a;
-  color: #9bb0c5;
-  background-color: #0b0e13;
+  padding: 20px;
+  background: #1e293b;
+  color: #94a3b8;
+  margin-top: 40px;
+  font-size: 0.9rem;
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
 }
