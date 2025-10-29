@@ -1,108 +1,76 @@
-/* ===== AIRPORT SAFETY WEBSITE STYLES ===== */
-
-:root {
-  --blue: #1d4ed8;
-  --light-blue: #eff6ff;
-  --gray: #4b5563;
-  --white: #ffffff;
-  --radius: 12px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
 }
 
 body {
-  margin: 0;
-  font-family: "Inter", "Segoe UI", sans-serif;
-  background: var(--light-blue);
-  color: var(--gray);
+  background-color: #0b0e13;
+  color: #f0f4f8;
   line-height: 1.6;
 }
 
-/* Header */
-.hero {
-  background: linear-gradient(135deg, #1e40af, #3b82f6);
-  color: var(--white);
+header {
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px 50px;
+  background: linear-gradient(145deg, #0b0e13, #1a2433);
+  border-bottom: 2px solid #1c2a3a;
 }
 
-.hero-content h1 {
-  font-size: 2rem;
+header h1 {
+  font-size: 2.8rem;
   margin-bottom: 10px;
+  color: #4da8da;
 }
 
-.hero-content p {
-  max-width: 600px;
-  margin: 0 auto;
+header p {
   font-size: 1.1rem;
+  color: #b0c4de;
 }
 
-/* Intro section */
-.intro {
-  max-width: 800px;
-  margin: 40px auto;
-  background: var(--white);
-  padding: 30px;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-.intro h2 {
-  color: var(--blue);
-  margin-top: 0;
-}
-
-/* Tips section */
 .tips {
-  max-width: 1000px;
-  margin: 40px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 50px 60px;
 }
 
 .tip {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 20px;
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
+  background-color: #131922;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .tip:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 }
 
 .tip img {
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
-.tip h3 {
-  margin: 0;
-  color: var(--blue);
+.tip h2 {
+  font-size: 1.4rem;
+  color: #64c4ed;
+  margin: 20px;
 }
 
 .tip p {
-  margin: 6px 0;
+  color: #d0d6dc;
+  margin: 0 20px 25px;
+  font-size: 1rem;
 }
 
-.tip .why {
-  font-size: 0.9rem;
-  color: #374151;
-  margin-top: 6px;
-  border-top: 1px solid #e5e7eb;
-  padding-top: 6px;
-}
-
-/* Footer */
 footer {
   text-align: center;
-  font-size: 0.9rem;
-  color: #6b7280;
-  padding: 20px;
-  margin-top: 40px;
-  background: #f3f4f6;
+  padding: 30px 10px;
+  border-top: 1px solid #1c2a3a;
+  color: #9bb0c5;
+  background-color: #0b0e13;
 }
-
