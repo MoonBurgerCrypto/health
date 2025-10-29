@@ -1,1 +1,108 @@
+/* ===== AIRPORT SAFETY WEBSITE STYLES ===== */
+
+:root {
+  --blue: #1d4ed8;
+  --light-blue: #eff6ff;
+  --gray: #4b5563;
+  --white: #ffffff;
+  --radius: 12px;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: var(--light-blue);
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+/* Header */
+.hero {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  color: var(--white);
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.hero-content p {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* Intro section */
+.intro {
+  max-width: 800px;
+  margin: 40px auto;
+  background: var(--white);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.intro h2 {
+  color: var(--blue);
+  margin-top: 0;
+}
+
+/* Tips section */
+.tips {
+  max-width: 1000px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tip {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.tip:hover {
+  transform: translateY(-4px);
+}
+
+.tip img {
+  width: 60px;
+  height: 60px;
+}
+
+.tip h3 {
+  margin: 0;
+  color: var(--blue);
+}
+
+.tip p {
+  margin: 6px 0;
+}
+
+.tip .why {
+  font-size: 0.9rem;
+  color: #374151;
+  margin-top: 6px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 6px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #6b7280;
+  padding: 20px;
+  margin-top: 40px;
+  background: #f3f4f6;
+}
 
