@@ -2,93 +2,208 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>General Travel Safety Quiz</title>
 <style>
-  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; background: #f7f9fb; margin:0; color:#222; }
-  header { background:#0b63a4; color:#fff; text-align:center; padding:24px 10px; }
-  .container { max-width:800px; margin:30px auto; padding:0 16px; }
-  .question { background:#fff; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,.05); padding:16px; margin-bottom:16px; }
-  .question h3 { margin-top:0; font-size:1.05rem; }
-  .option { background:#eee; border-radius:6px; padding:10px; margin:6px 0; cursor:pointer; transition: background .3s; }
-  .option:hover { background:#ddd; }
-  .correct { background:#b9f6ca !important; }
-  .wrong { background:#ff8a80 !important; }
-  #scoreBtn { display:block; margin:24px auto; padding:10px 20px; background:#0b63a4; color:#fff; border:none; border-radius:6px; font-size:1rem; cursor:pointer; }
-  #score { text-align:center; font-size:1.2rem; margin-top:12px; }
+/* Base Styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212;
+  color: #f4f4f4;
+  line-height: 1.7;
+}
+
+/* Header */
+header {
+  background-color: #ff944d;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 4px solid #e66e1f;
+}
+
+main {
+  padding: 2rem;
+  max-width: 850px;
+  margin: auto;
+}
+
+h1, h2 {
+  margin-bottom: 0.6rem;
+}
+
+.question-card {
+  background-color: #1f1f1f;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+.option {
+  background: #2a2a2a;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  background: #3a3a3a;
+  transform: scale(1.02);
+}
+
+.correct {
+  background: #b9f6ca !important;
+}
+
+.wrong {
+  background: #ff8a80 !important;
+}
+
+.action-button {
+  background-color: #ff944d;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #e66e1f;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255,204,0,0.6);
+}
+
+#score {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
 </style>
 </head>
 <body>
+
 <header>
   <h1>✈️ General Travel Safety Quiz</h1>
   <p>Test your knowledge on staying safe while traveling</p>
 </header>
 
-<div class="container" id="quiz"></div>
-<button id="scoreBtn">Show Score</button>
-<div id="score"></div>
+<main>
+  <div id="quiz-container" class="question-card"></div>
+  <div style="text-align:center;">
+    <button id="prevBtn" class="action-button">Previous</button>
+    <button id="nextBtn" class="action-button">Next</button>
+  </div>
+  <div id="score"></div>
+</main>
 
 <script>
+// Utility function to shuffle an array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// Questions with proper correct answer index
 const questions = [
-{q: "What should you do before booking accommodation?", options: ["Check reviews and ratings", "Book the cheapest option blindly", "Ignore location"], answer: 0},
-{q: "How can you protect your passport while traveling?", options: ["Keep it in a secure travel wallet", "Leave it in checked luggage", "Show it to everyone"], answer: 0},
-{q: "When using public Wi-Fi abroad, you should:", options: ["Use a VPN", "Access sensitive info freely", "Share passwords"], answer: 0},
-{q: "What is the safest way to carry cash?", options: ["Spread it between wallet, money belt, and hotel safe", "Keep all in one pocket", "Leave it on your bed"], answer: 0},
-{q: "How should you handle your luggage in public spaces?", options: ["Keep it close and attended", "Leave it while shopping", "Stack in corners"], answer: 0},
-{q: "What’s a good practice for hotel room safety?", options: ["Lock doors/windows and use safes", "Leave doors open", "Ignore safety instructions"], answer: 0},
-{q: "If approached by a scammer, you should:", options: ["Politely decline and walk away", "Engage and argue", "Hand over valuables"], answer: 0},
-{q: "How can you avoid getting lost in a new city?", options: ["Use maps, apps, or ask locals", "Wander without plan", "Ignore signs"], answer: 0},
-{q: "What is important when taking taxis in an unfamiliar country?", options: ["Use reputable services or apps", "Flag any random car", "Hitchhike"], answer: 0},
-{q: "Before traveling abroad, you should:", options: ["Check travel advisories and health info", "Ignore regulations", "Pack last minute"], answer: 0},
-{q: "How should you manage medication while traveling?", options: ["Keep in original labeled containers", "Mix in luggage without label", "Leave at home"], answer: 0},
-{q: "When flying, why should you stay hydrated?", options: ["Cabin air is dry", "To sleep more", "To carry liquids"], answer: 0},
-{q: "How should you handle your electronics in public?", options: ["Keep them secure and avoid leaving unattended", "Leave on tables", "Flash them frequently"], answer: 0},
-{q: "What is a safe way to meet strangers while traveling?", options: ["Stay in public areas and use common sense", "Go alone to unknown places", "Share your hotel info immediately"], answer: 0},
-{q: "What should you do if your flight is delayed overnight?", options: ["Contact airline for accommodations", "Sleep in unsafe areas", "Leave airport"], answer: 0},
-{q: "How can you prevent motion sickness on buses or boats?", options: ["Sit where motion is minimal and take precautions", "Sit anywhere and ignore symptoms", "Avoid drinking water"], answer: 0},
-{q: "Which item should you always keep accessible during travel?", options: ["ID, tickets, emergency contacts", "All electronics together", "Extra souvenirs"], answer: 0},
-{q: "Why should you check weather and road conditions before road trips?", options: ["To plan safely", "Ignore completely", "Just check gas stations"], answer: 0},
-{q: "What is a smart way to carry a phone or wallet in crowded areas?", options: ["Use hidden pockets or money belt", "Leave in backpack unzipped", "Hand to friends constantly"], answer: 0},
-{q: "How should you behave in unfamiliar neighborhoods?", options: ["Stay alert, avoid risky areas, trust instincts", "Act distracted", "Run without plan"], answer: 0},
-{q: "If you lose your passport abroad, you should:", options: ["Contact your embassy immediately", "Panic", "Ignore it"], answer: 0},
-{q: "How can you reduce the risk of theft in hotels?", options: ["Lock valuables in safe and use security chains", "Leave everything on bed", "Share room code"], answer: 0},
-{q: "What’s a safe practice when using escalators or moving walkways?", options: ["Hold the handrail and watch your step", "Stand backwards", "Block the way"], answer: 0},
-{q: "Why is it important to tell someone your itinerary?", options: ["For emergencies and check-ins", "To brag", "Not necessary"], answer: 0},
-{q: "How should you approach food and water safety abroad?", options: ["Drink bottled water and eat cooked food from safe sources", "Drink tap water always", "Eat street food without caution"], answer: 0}
+  {q: "What should you do before booking accommodation?", options: ["Check reviews and ratings", "Book the cheapest option blindly", "Ignore location"], answer: 0},
+  {q: "How can you protect your passport while traveling?", options: ["Keep it in a secure travel wallet", "Leave it in checked luggage", "Show it to everyone"], answer: 0},
+  {q: "When using public Wi-Fi abroad, you should:", options: ["Use a VPN", "Access sensitive info freely", "Share passwords"], answer: 0},
+  {q: "What is the safest way to carry cash?", options: ["Keep all in one pocket", "Spread it between wallet, money belt, and hotel safe", "Leave it on your bed"], answer: 1},
+  {q: "How should you handle your luggage in public spaces?", options: ["Stack in corners", "Keep it close and attended", "Leave it while shopping"], answer: 1},
+  {q: "What’s a good practice for hotel room safety?", options: ["Lock doors/windows and use safes", "Leave doors open", "Ignore safety instructions"], answer: 0},
+  {q: "If approached by a scammer, you should:", options: ["Politely decline and walk away", "Engage and argue", "Hand over valuables"], answer: 0},
+  {q: "How can you avoid getting lost in a new city?", options: ["Use maps, apps, or ask locals", "Wander without plan", "Ignore signs"], answer: 0},
+  {q: "What is important when taking taxis in an unfamiliar country?", options: ["Use reputable services or apps", "Flag any random car", "Hitchhike"], answer: 0},
+  {q: "Before traveling abroad, you should:", options: ["Check travel advisories and health info", "Ignore regulations", "Pack last minute"], answer: 0},
+  {q: "How should you manage medication while traveling?", options: ["Keep in original labeled containers", "Mix in luggage without label", "Leave at home"], answer: 0},
+  {q: "When flying, why should you stay hydrated?", options: ["Cabin air is dry", "To sleep more", "To carry liquids"], answer: 0},
+  {q: "How should you handle your electronics in public?", options: ["Keep them secure and avoid leaving unattended", "Leave on tables", "Flash them frequently"], answer: 0},
+  {q: "What is a safe way to meet strangers while traveling?", options: ["Stay in public areas and use common sense", "Go alone to unknown places", "Share your hotel info immediately"], answer: 0},
+  {q: "What should you do if your flight is delayed overnight?", options: ["Contact airline for accommodations", "Sleep in unsafe areas", "Leave airport"], answer: 0},
+  {q: "How can you prevent motion sickness on buses or boats?", options: ["Sit where motion is minimal and take precautions", "Sit anywhere and ignore symptoms", "Avoid drinking water"], answer: 0},
+  {q: "Which item should you always keep accessible during travel?", options: ["ID, tickets, emergency contacts", "All electronics together", "Extra souvenirs"], answer: 0},
+  {q: "Why should you check weather and road conditions before road trips?", options: ["To plan safely", "Ignore completely", "Just check gas stations"], answer: 0},
+  {q: "What is a smart way to carry a phone or wallet in crowded areas?", options: ["Use hidden pockets or money belt", "Leave in backpack unzipped", "Hand to friends constantly"], answer: 0},
+  {q: "How should you behave in unfamiliar neighborhoods?", options: ["Stay alert, avoid risky areas, trust instincts", "Act distracted", "Run without plan"], answer: 0},
+  {q: "If you lose your passport abroad, you should:", options: ["Contact your embassy immediately", "Panic", "Ignore it"], answer: 0},
+  {q: "How can you reduce the risk of theft in hotels?", options: ["Lock valuables in safe and use security chains", "Leave everything on bed", "Share room code"], answer: 0},
+  {q: "What’s a safe practice when using escalators or moving walkways?", options: ["Hold the handrail and watch your step", "Stand backwards", "Block the way"], answer: 0},
+  {q: "Why is it important to tell someone your itinerary?", options: ["For emergencies and check-ins", "To brag", "Not necessary"], answer: 0},
+  {q: "How should you approach food and water safety abroad?", options: ["Drink bottled water and eat cooked food from safe sources", "Drink tap water always", "Eat street food without caution"], answer: 0}
 ];
 
-const quizContainer = document.getElementById("quiz");
+// Shuffle questions
+shuffleArray(questions);
+
+let currentQuestion = 0;
 let score = 0;
 let answered = Array(questions.length).fill(false);
 
-questions.forEach((q, i) => {
-  const div = document.createElement("div");
-  div.className = "question";
-  div.innerHTML = `<h3>${i+1}. ${q.q}</h3>`;
-  q.options.forEach((opt, idx) => {
-    const optDiv = document.createElement("div");
-    optDiv.className = "option";
-    optDiv.textContent = opt;
-    optDiv.addEventListener("click", () => {
-      if (answered[i]) return;
-      answered[i] = true;
-      if (idx === q.answer) {
-        optDiv.classList.add("correct");
+const container = document.getElementById("quiz-container");
+const scoreDisplay = document.getElementById("score");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+function showQuestion(index) {
+  container.innerHTML = '';
+  const q = questions[index];
+
+  // Shuffle options
+  const options = q.options.map((opt, idx) => ({text: opt, isCorrect: idx === q.answer}));
+  shuffleArray(options);
+
+  const qEl = document.createElement('div');
+  qEl.innerHTML = `<h2>Question ${index+1} of ${questions.length}</h2><p>${q.q}</p>`;
+
+  options.forEach((optObj) => {
+    const optDiv = document.createElement('div');
+    optDiv.className = 'option';
+    optDiv.textContent = optObj.text;
+    optDiv.addEventListener('click', () => {
+      if(answered[index]) return;
+      answered[index] = true;
+      if(optObj.isCorrect) {
+        optDiv.classList.add('correct');
         score++;
       } else {
-        optDiv.classList.add("wrong");
-        const correctOpt = div.querySelectorAll(".option")[q.answer];
-        correctOpt.classList.add("correct");
+        optDiv.classList.add('wrong');
+        const correctOpt = Array.from(container.getElementsByClassName('option'))
+          .find(el => options.find(o => o.text === el.textContent).isCorrect);
+        correctOpt.classList.add('correct');
       }
     });
-    div.appendChild(optDiv);
+    qEl.appendChild(optDiv);
   });
-  quizContainer.appendChild(div);
+  container.appendChild(qEl);
+}
+
+prevBtn.addEventListener('click', () => {
+  if(currentQuestion > 0) currentQuestion--;
+  showQuestion(currentQuestion);
 });
 
-document.getElementById("scoreBtn").addEventListener("click", () => {
-  document.getElementById("score").textContent = `You got ${score} out of ${questions.length} correct!`;
+nextBtn.addEventListener('click', () => {
+  if(currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion(currentQuestion);
+  } else {
+    scoreDisplay.textContent = `You got ${score} out of ${questions.length} correct!`;
+  }
 });
+
+// Initialize first question
+showQuestion(currentQuestion);
 </script>
+
 </body>
 </html>
