@@ -5,56 +5,64 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Airport Safety Tips</title>
   <style>
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      margin: 0;
-      background: #f7f7f7;
-      color: #222;
+    :root{
+      --blue:#0b63a4;
+      --bg:#f7f7f7;
+      --card:#fff;
+      --muted:#666;
     }
-    .hero {
-      background: #0b63a4;
-      color: #fff;
-      padding: 28px 20px;
-      text-align: center;
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      margin:0;
+      background:var(--bg);
+      color:#222;
     }
-    .container {
-      max-width: 980px;
-      margin: 24px auto;
-      padding: 0 16px;
+    .hero{
+      background:var(--blue);
+      color:#fff;
+      padding:28px 20px;
+      text-align:center;
     }
-    .tips {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
+    .container{
+      max-width:980px;
+      margin:24px auto;
+      padding:0 16px;
     }
-    .tip-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 14px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.06);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .tips{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
     }
-    .tip-card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 6px;
+    .tip-card{
+      background:var(--card);
+      border-radius:8px;
+      padding:14px;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
     }
-    h2 {
-      margin: 6px 0 0;
-      font-size: 1.05rem;
+    .art{
+      width:100%;
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:6px;
+      background:linear-gradient(180deg, rgba(11,99,164,0.06), rgba(11,99,164,0.02));
     }
-    p {
-      margin: 6px 0 10px;
-      line-height: 1.35;
+    .art svg{
+      width:86px;
+      height:86px;
+      display:block;
     }
-    footer {
-      text-align: center;
-      padding: 18px 8px;
-      color: #444;
-    }
+    h2{margin:6px 0 0;font-size:1.05rem;}
+    p{margin:6px 0 10px;line-height:1.35;color:var(--muted)}
+    footer{text-align:center;padding:18px 8px;color:#444}
+    /* small visual polish */
+    .tip-card:hover{transform:translateY(-4px);transition:transform .18s ease}
+    @media (max-width:420px){ .art svg{width:72px;height:72px} }
   </style>
 </head>
 <body>
@@ -66,35 +74,79 @@
   <main class="container">
     <section class="tips">
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1531913764164-8762d4b4d3c2?auto=format&fit=crop&w=800&q=80" alt="Watch Your Belongings" />
-        <h2>1. Watch Your Belongings</h2>
-        <p>Keep your bags close and never leave them unattended. Airports are busy places, and unattended items can be stolen or flagged as a security concern.</p>
-      </div>
+      <article class="tip-card" aria-labelledby="t1">
+        <div class="art" role="img" aria-label="Luggage icon: watch your belongings">
+          <!-- suitcase / luggage SVG -->
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="10" y="18" width="44" height="32" rx="3" stroke="#0b63a4" stroke-width="2" fill="#ffffff"/>
+            <rect x="22" y="8" width="20" height="10" rx="2" stroke="#0b63a4" stroke-width="2" fill="#ffffff"/>
+            <path d="M20 30h24" stroke="#0b63a4" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="22" cy="46" r="2.4" fill="#0b63a4"/>
+            <circle cx="42" cy="46" r="2.4" fill="#0b63a4"/>
+          </svg>
+        </div>
+        <h2 id="t1">1. Watch Your Belongings</h2>
+        <p>Keep your bags close and never leave them unattended. Unattended items can be stolen or flagged as security concerns.</p>
+      </article>
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1573496774564-b8d87734a5a5?auto=format&fit=crop&w=800&q=80" alt="Be Ready for Security" />
-        <h2>2. Be Ready for Security</h2>
-        <p>Have your boarding pass and ID ready, and follow rules to make security smoother for everyone. This helps avoid stress and keeps lines moving quickly.</p>
-      </div>
+      <article class="tip-card" aria-labelledby="t2">
+        <div class="art" role="img" aria-label="Security checkpoint icon">
+          <!-- security / checkpoint SVG -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="6" y="12" width="52" height="8" rx="2" fill="#fff" stroke="#0b63a4" stroke-width="2"/>
+            <rect x="10" y="24" width="44" height="28" rx="3" fill="#fff" stroke="#0b63a4" stroke-width="2"/>
+            <path d="M16 34h32" stroke="#0b63a4" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="22" cy="30" r="2.6" fill="#0b63a4"/>
+            <circle cx="42" cy="30" r="2.6" fill="#0b63a4"/>
+          </svg>
+        </div>
+        <h2 id="t2">2. Be Ready for Security</h2>
+        <p>Have your boarding pass and ID ready, remove liquids/laptops when required, and follow posted rules to keep lines moving.</p>
+      </article>
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1517959105821-eaf64e55b2c5?auto=format&fit=crop&w=800&q=80" alt="Follow Staff Instructions" />
-        <h2>3. Follow Staff Instructions</h2>
-        <p>Always listen to airport staff and follow safety instructions. They’re trained to keep everyone safe and make sure flights stay on schedule.</p>
-      </div>
+      <article class="tip-card" aria-labelledby="t3">
+        <div class="art" role="img" aria-label="Airport staff / directions icon">
+          <!-- staff / directions SVG -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="4" stroke="#0b63a4" stroke-width="2" fill="#fff"/>
+            <path d="M16 28c0 3 4 6 8 6s8-3 8-6" stroke="#0b63a4" stroke-width="2" fill="none"/>
+            <rect x="36" y="12" width="18" height="12" rx="2" stroke="#0b63a4" stroke-width="2" fill="#fff"/>
+            <path d="M36 36h18" stroke="#0b63a4" stroke-width="2" stroke-linecap="round"/>
+            <path d="M52 36v10" stroke="#0b63a4" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2 id="t3">3. Follow Staff Instructions</h2>
+        <p>Airport staff are trained to keep everyone safe — follow directions, signage, and announcements to help flights run smoothly.</p>
+      </article>
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1588776814546-ec6c9c7b2db8?auto=format&fit=crop&w=800&q=80" alt="Practice Good Hygiene" />
-        <h2>4. Practice Good Hygiene</h2>
-        <p>Wash your hands often and use sanitizer after touching surfaces like escalator rails or trays. This helps you stay healthy while traveling.</p>
-      </div>
+      <article class="tip-card" aria-labelledby="t4">
+        <div class="art" role="img" aria-label="Hand sanitizer icon">
+          <!-- sanitizer / hygiene SVG -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="22" y="16" width="20" height="36" rx="3" fill="#fff" stroke="#0b63a4" stroke-width="2"/>
+            <rect x="28" y="10" width="8" height="8" rx="1.5" fill="#fff" stroke="#0b63a4" stroke-width="2"/>
+            <path d="M32 22v10" stroke="#0b63a4" stroke-width="2" stroke-linecap="round"/>
+            <path d="M30 36c1 2 3 3 4 3s3-1 4-3" stroke="#0b63a4" stroke-width="2" fill="none"/>
+            <circle cx="32" cy="46" r="2.5" fill="#0b63a4"/>
+          </svg>
+        </div>
+        <h2 id="t4">4. Practice Good Hygiene</h2>
+        <p>Wash hands often and use sanitizer after touching public surfaces like rails or security trays to stay healthy while traveling.</p>
+      </article>
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1596445836561-6e3e7a86f083?auto=format&fit=crop&w=800&q=80" alt="Stay Seated and Buckled" />
-        <h2>5. Stay Seated and Buckled</h2>
-        <p>Once you’re on the plane, keep your seatbelt fastened when seated. Turbulence can happen anytime, so staying buckled keeps you safe.</p>
-      </div>
+      <article class="tip-card" aria-labelledby="t5">
+        <div class="art" role="img" aria-label="Seatbelt / airplane icon">
+          <!-- seatbelt / plane SVG -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="8" y="26" width="48" height="12" rx="3" stroke="#0b63a4" stroke-width="2" fill="#fff"/>
+            <path d="M20 26v-6c0-2 2-4 4-4h16c2 0 4 2 4 4v6" stroke="#0b63a4" stroke-width="2" fill="none"/>
+            <rect x="26" y="30" width="12" height="4" rx="1" fill="#0b63a4"/>
+            <path d="M14 32h36" stroke="#0b63a4" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2 id="t5">5. Stay Seated and Buckled</h2>
+        <p>Keep your seatbelt fastened while seated — turbulence can happen unexpectedly, and buckling keeps you safe.</p>
+      </article>
 
     </section>
   </main>
