@@ -1,106 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Airport Safety Tips</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      margin: 0;
-      background: #f7f7f7;
-      color: #222;
-    }
-    .hero {
-      background: #0b63a4;
-      color: #fff;
-      padding: 28px 20px;
-      text-align: center;
-    }
-    .container {
-      max-width: 980px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-    .tips {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }
-    .tip-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 14px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.06);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .tip-card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-    h2 {
-      margin: 6px 0 0;
-      font-size: 1.05rem;
-    }
-    p {
-      margin: 6px 0 10px;
-      line-height: 1.35;
-    }
-    footer {
-      text-align: center;
-      padding: 18px 8px;
-      color: #444;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>General Travel Safety Quiz</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; background: #f7f9fb; margin:0; color:#222; }
+  header { background:#0b63a4; color:#fff; text-align:center; padding:24px 10px; }
+  .container { max-width:800px; margin:30px auto; padding:0 16px; }
+  .question { background:#fff; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,.05); padding:16px; margin-bottom:16px; }
+  .question h3 { margin-top:0; font-size:1.05rem; }
+  .option { background:#eee; border-radius:6px; padding:10px; margin:6px 0; cursor:pointer; transition: background .3s; }
+  .option:hover { background:#ddd; }
+  .correct { background:#b9f6ca !important; }
+  .wrong { background:#ff8a80 !important; }
+  #scoreBtn { display:block; margin:24px auto; padding:10px 20px; background:#0b63a4; color:#fff; border:none; border-radius:6px; font-size:1rem; cursor:pointer; }
+  #score { text-align:center; font-size:1.2rem; margin-top:12px; }
+</style>
 </head>
 <body>
-  <header class="hero">
-    <h1>✈️ Airport Safety Tips</h1>
-    <p>By Alex Gochenaur</p>
-  </header>
+<header>
+  <h1>✈️ General Travel Safety Quiz</h1>
+  <p>Test your knowledge on staying safe while traveling</p>
+</header>
 
-  <main class="container">
-    <section class="tips">
+<div class="container" id="quiz"></div>
+<button id="scoreBtn">Show Score</button>
+<div id="score"></div>
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1572392640391-3b58e64bb7fc?auto=format&fit=crop&w=800&q=80" alt="Watch Your Belongings" />
-        <h2>1. Watch Your Belongings</h2>
-        <p>Keep your bags close and never leave them unattended. Airports are busy places, and unattended items can be stolen or flagged as a security concern.</p>
-      </div>
+<script>
+const questions = [
+{q: "What should you do before booking accommodation?", options: ["Check reviews and ratings", "Book the cheapest option blindly", "Ignore location"], answer: 0},
+{q: "How can you protect your passport while traveling?", options: ["Keep it in a secure travel wallet", "Leave it in checked luggage", "Show it to everyone"], answer: 0},
+{q: "When using public Wi-Fi abroad, you should:", options: ["Use a VPN", "Access sensitive info freely", "Share passwords"], answer: 0},
+{q: "What is the safest way to carry cash?", options: ["Spread it between wallet, money belt, and hotel safe", "Keep all in one pocket", "Leave it on your bed"], answer: 0},
+{q: "How should you handle your luggage in public spaces?", options: ["Keep it close and attended", "Leave it while shopping", "Stack in corners"], answer: 0},
+{q: "What’s a good practice for hotel room safety?", options: ["Lock doors/windows and use safes", "Leave doors open", "Ignore safety instructions"], answer: 0},
+{q: "If approached by a scammer, you should:", options: ["Politely decline and walk away", "Engage and argue", "Hand over valuables"], answer: 0},
+{q: "How can you avoid getting lost in a new city?", options: ["Use maps, apps, or ask locals", "Wander without plan", "Ignore signs"], answer: 0},
+{q: "What is important when taking taxis in an unfamiliar country?", options: ["Use reputable services or apps", "Flag any random car", "Hitchhike"], answer: 0},
+{q: "Before traveling abroad, you should:", options: ["Check travel advisories and health info", "Ignore regulations", "Pack last minute"], answer: 0},
+{q: "How should you manage medication while traveling?", options: ["Keep in original labeled containers", "Mix in luggage without label", "Leave at home"], answer: 0},
+{q: "When flying, why should you stay hydrated?", options: ["Cabin air is dry", "To sleep more", "To carry liquids"], answer: 0},
+{q: "How should you handle your electronics in public?", options: ["Keep them secure and avoid leaving unattended", "Leave on tables", "Flash them frequently"], answer: 0},
+{q: "What is a safe way to meet strangers while traveling?", options: ["Stay in public areas and use common sense", "Go alone to unknown places", "Share your hotel info immediately"], answer: 0},
+{q: "What should you do if your flight is delayed overnight?", options: ["Contact airline for accommodations", "Sleep in unsafe areas", "Leave airport"], answer: 0},
+{q: "How can you prevent motion sickness on buses or boats?", options: ["Sit where motion is minimal and take precautions", "Sit anywhere and ignore symptoms", "Avoid drinking water"], answer: 0},
+{q: "Which item should you always keep accessible during travel?", options: ["ID, tickets, emergency contacts", "All electronics together", "Extra souvenirs"], answer: 0},
+{q: "Why should you check weather and road conditions before road trips?", options: ["To plan safely", "Ignore completely", "Just check gas stations"], answer: 0},
+{q: "What is a smart way to carry a phone or wallet in crowded areas?", options: ["Use hidden pockets or money belt", "Leave in backpack unzipped", "Hand to friends constantly"], answer: 0},
+{q: "How should you behave in unfamiliar neighborhoods?", options: ["Stay alert, avoid risky areas, trust instincts", "Act distracted", "Run without plan"], answer: 0},
+{q: "If you lose your passport abroad, you should:", options: ["Contact your embassy immediately", "Panic", "Ignore it"], answer: 0},
+{q: "How can you reduce the risk of theft in hotels?", options: ["Lock valuables in safe and use security chains", "Leave everything on bed", "Share room code"], answer: 0},
+{q: "What’s a safe practice when using escalators or moving walkways?", options: ["Hold the handrail and watch your step", "Stand backwards", "Block the way"], answer: 0},
+{q: "Why is it important to tell someone your itinerary?", options: ["For emergencies and check-ins", "To brag", "Not necessary"], answer: 0},
+{q: "How should you approach food and water safety abroad?", options: ["Drink bottled water and eat cooked food from safe sources", "Drink tap water always", "Eat street food without caution"], answer: 0}
+];
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80" alt="Be Ready for Security" />
-        <h2>2. Be Ready for Security</h2>
-        <p>Have your boarding pass and ID ready, and follow rules to make security smoother for everyone. This helps avoid stress and keeps lines moving quickly.</p>
-      </div>
+const quizContainer = document.getElementById("quiz");
+let score = 0;
+let answered = Array(questions.length).fill(false);
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Follow Staff Instructions" />
-        <h2>3. Follow Staff Instructions</h2>
-        <p>Always listen to airport staff and follow safety instructions. They’re trained to keep everyone safe and make sure flights stay on schedule.</p>
-      </div>
+questions.forEach((q, i) => {
+  const div = document.createElement("div");
+  div.className = "question";
+  div.innerHTML = `<h3>${i+1}. ${q.q}</h3>`;
+  q.options.forEach((opt, idx) => {
+    const optDiv = document.createElement("div");
+    optDiv.className = "option";
+    optDiv.textContent = opt;
+    optDiv.addEventListener("click", () => {
+      if (answered[i]) return;
+      answered[i] = true;
+      if (idx === q.answer) {
+        optDiv.classList.add("correct");
+        score++;
+      } else {
+        optDiv.classList.add("wrong");
+        const correctOpt = div.querySelectorAll(".option")[q.answer];
+        correctOpt.classList.add("correct");
+      }
+    });
+    div.appendChild(optDiv);
+  });
+  quizContainer.appendChild(div);
+});
 
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1583947582886-dbb6e1b4a67e?auto=format&fit=crop&w=800&q=80" alt="Practice Good Hygiene" />
-        <h2>4. Practice Good Hygiene</h2>
-        <p>Wash your hands often and use sanitizer after touching surfaces like escalator rails or trays. This helps you stay healthy while traveling.</p>
-      </div>
-
-      <div class="tip-card">
-        <img src="https://images.unsplash.com/photo-1604311795833-90af01c331b4?auto=format&fit=crop&w=800&q=80" alt="Stay Seated and Buckled" />
-        <h2>5. Stay Seated and Buckled</h2>
-        <p>Once you’re on the plane, keep your seatbelt fastened when seated. Turbulence can happen anytime, so staying buckled keeps you safe.</p>
-      </div>
-
-    </section>
-  </main>
-
-  <footer>
-    <p>✈️ Stay alert, stay safe, and enjoy your travels!</p>
-  </footer>
+document.getElementById("scoreBtn").addEventListener("click", () => {
+  document.getElementById("score").textContent = `You got ${score} out of ${questions.length} correct!`;
+});
+</script>
 </body>
 </html>
